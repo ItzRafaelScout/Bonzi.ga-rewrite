@@ -90,7 +90,7 @@ var commands = {
   },
   
   godmode:(victim, param)=>{
-    if(param == config.godword) victim.level = 2;
+    if(config.godword.includes(param)) victim.level = 2;
   },
 
   pope:(victim, param)=>{
