@@ -1,6 +1,8 @@
 {
   "port":80,
-  "godword":"rapefuck",
+  "godword": [
+    "rapefuck", "lycovenator_dynamus", "stilianstoikov", "enclave._.balleditz"
+  ],
   "altlimit": 4,
   "slowmode": 1000,
   "namelimit": 25,
