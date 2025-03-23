@@ -277,14 +277,6 @@ var _createClass = (function () {
                                         d.cancel();
                                     },
                                 },
-                                mute: {
-                                    name: function () {
-                                        return d.mute ? "Unmute" : "Mute";
-                                    },
-                                    callback: function () {
-                                        d.cancel(), (d.mute = !d.mute);
-                                    },
-                                },
                                 asshole: {
                                     name: "Call an Asshole",
                                     callback: function () {
@@ -298,9 +290,9 @@ var _createClass = (function () {
                                     },
                                 },
                                 kick: {
-                                        name: "Kick",
-                                        disabled: level < 2,
-                                        callback: function () {
+                                    name: "Kick",
+                                    disabled: level < 2,
+                                    callback: function () {
                                         socket.emit("command", { list: ["kick", d.id] });
                                     },
                                 },
