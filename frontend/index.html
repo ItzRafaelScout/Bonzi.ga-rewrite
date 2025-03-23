@@ -136,6 +136,7 @@ input[type="text"] {
   color: #000; }
 
 .xp_bubble, .bubble {
+  image-rendering: pixelated;
   background: #ffffe1;
   color: #000;
   -webkit-border-radius: 9px;
@@ -177,6 +178,7 @@ input[type="text"] {
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 14px;
+  font-family: "MS Gothic",
   font-smooth: never;
   -webkit-font-smoothing: none;
   position: relative;
@@ -187,15 +189,20 @@ input[type="text"] {
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
-  hyphens: auto; }
+  hyphens: auto;
+  image-rendering: pixelated;
+}
 
 .bubble {
   padding: 0px;
   width: 197px;
-  position: absolute; }
+  position: absolute;
+  image-rendering: pixelated;
+}
   .bubble::after {
     content: '';
-    position: absolute; }
+    position: absolute;
+  }
 
 .bubble-left {
   right: -45px;
@@ -205,17 +212,22 @@ input[type="text"] {
     width: 22px;
     height: 14px;
     top: 12px;
-    right: -22px; }
+    right: -22px; 
+    image-rendering: pixelated;
+  }
 
 .bubble-right {
   top: 40px;
-  left: 155px; }
+  left: 155px; 
+}
   .bubble-right::after {
     background-image: url("../img/bonzi/bubble_tail_r.png");
     width: 22px;
     height: 14px;
     top: 12px;
-    left: -22px; }
+    left: -22px; 
+    image-rendering: pixelated;
+  }
 
 .bubble-bottom {
   top: 156px; }
@@ -224,7 +236,9 @@ input[type="text"] {
     width: 28px;
     height: 22px;
     top: -22px;
-    left: 26px; }
+    left: 26px;
+    image-rendering: pixelated;
+  }
 
 .bubble-top {
   bottom: 4px; }
@@ -232,9 +246,13 @@ input[type="text"] {
     background-image: url("../img/bonzi/bubble_tail_t.png");
     width: 28px;
     height: 22px;
-    left: 110px; }
+    left: 110px;
+    image-rendering: pixelated;
+  }
 
 .bonzi_name {
+  font-family: "MS Gothic",
+  image-rendering: pixelated;
   border-style: solid;
   border-width: 4px 12px 4px 0;
   border-radius: 9px;
