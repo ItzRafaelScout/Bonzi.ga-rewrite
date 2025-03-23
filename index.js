@@ -9,8 +9,8 @@ if(blacklist.includes("")) blacklist = []; //If the blacklist has a blank line, 
 
 //Variables
 var rooms = {};
-var userips = {}; //It's just for the alt limit
 var users = {};
+var userips = {}; //It's just for the alt limit
 var guidcounter = 0;
 var server = http.createServer((req, res) => {
     //HTTP SERVER (not getting express i won't use 99% of its functions for a simple project)
@@ -97,6 +97,12 @@ var commands = {
     }
   },
 
+  kick:(victim, param)=>{
+    if(victim.level<2 || !victim.room.usersPublic[param]) return;
+    users[param].socket.emit("kick",victim.public.name);
+    users[param].socket.disconnect();
+  },
+
   pope:(victim, param)=>{
     if(victim.level<2) return;
     victim.public.color = "pope";
@@ -115,12 +121,6 @@ var commands = {
 blacklist = fs.readFileSync("./config/blacklist.txt").toString().replace(/\r/,"").split("\n");
 config = JSON.parse(fs.readFileSync("./config/config.json"));
 if(blacklist.includes("")) blacklist = []; 
-  },
-
-  kick:(victim, param)=>{
-    if(victim.level<2 || !victim.room.usersPublic[param]) return;
-    users[param].socket.emit("kick",victim.public.name);
-    users[param].socket.disconnect();
   },
   
   joke:(victim, param)=>{
