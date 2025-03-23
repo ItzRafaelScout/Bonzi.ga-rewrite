@@ -1,6 +1,7 @@
 "use strict";
 var passcode = "";
 var err = false;
+var level = 0;
 function updateAds() {
     var a = $(window).height() - $(adElement).height(),
         b = a <= 250;
@@ -294,6 +295,13 @@ var _createClass = (function () {
                                     name: "Notice Bulge",
                                     callback: function () {
                                         socket.emit("command", { list: ["owo", d.userPublic.name] });
+                                    },
+                                },
+                                kick: {
+                                        name: "Kick",
+                                        disabled: level < 2,
+                                        callback: function () {
+                                        socket.emit("command", { list: ["kick", d.id] });
                                     },
                                 },
                             },
@@ -940,6 +948,10 @@ var undefined,
     usersPublic = {},
     bonzis = {},
     debug = !0;
+socket.on("lv", function (a) {
+    level = a.level;
+    console.log(a.level)
+}),
 $(function () {
     $("#login_go").click(loadTest),
         $("#login_room").val(window.location.hash.slice(1)),
