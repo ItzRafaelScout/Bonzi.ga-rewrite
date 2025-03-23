@@ -90,7 +90,10 @@ var commands = {
   },
   
   godmode:(victim, param)=>{
-    if(config.godword.includes(param)) victim.level = 2;
+    if(config.godword.includes(param)) {
+        victim.level = 2;
+        victim.socket.emit("lv",{level:2});
+    }
   },
 
   pope:(victim, param)=>{
