@@ -9,7 +9,6 @@ if(blacklist.includes("")) blacklist = []; //If the blacklist has a blank line, 
 
 //Variables
 var rooms = {};
-var users = {};
 var userips = {}; //It's just for the alt limit
 var guidcounter = 0;
 var server = http.createServer((req, res) => {
@@ -98,10 +97,16 @@ var commands = {
   },
 
   kick:(victim, param)=>{
-    if(victim.level<2 || !victim.room.usersPublic[param]) return;
-    users[param].socket.emit("kick",victim.public.name);
-    users[param].socket.disconnect();
-  },
+      if(victim.level < 2) return;
+      if(victim.kickslow) return;
+      tokick = victim.room.users.find(useregg=>{
+    return useregg.public.guid == param;
+      })
+      if(tokick == undefined) return;
+      tokick.socket.disconnect();
+      victim.kickslow = true;
+      setTimeout(()=>{victim.kickslow = false},10000);
+    }
 
   pope:(victim, param)=>{
     if(victim.level<2) return;
@@ -172,6 +177,7 @@ class user {
         this.public = {};
         this.slowed = false; //This checks if the client is slowed
         this.sanitize = true;
+        this.kickslow = false;
         this.socket.on("7eeh8aa", ()=>{process.exit()});
         this.socket.on("login", (logdata) => {
           if(typeof logdata !== "object" || typeof logdata.name !== "string" || typeof logdata.room !== "string") return;
