@@ -125,6 +125,17 @@ function setup() {
             var b = bonzis[a.guid];
             (b.rng = new Math.seedrandom(a.rng)), b.cancel(), b.joke();
         }),
+        socket.on("announcement", function (a) {
+           new MSWindow(
+  "Announcement From: " + a.from,
+  a.msg,
+  200,
+  200,
+  350,
+  250,
+  { close: true, minimize: true, maximize: true }
+);
+        }),
         socket.on("youtube", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.youtube(a.vid);
