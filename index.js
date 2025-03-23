@@ -10,6 +10,7 @@ if(blacklist.includes("")) blacklist = []; //If the blacklist has a blank line, 
 //Variables
 var rooms = {};
 var userips = {}; //It's just for the alt limit
+var users = {};
 var guidcounter = 0;
 var server = http.createServer((req, res) => {
     //HTTP SERVER (not getting express i won't use 99% of its functions for a simple project)
