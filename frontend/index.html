@@ -649,6 +649,114 @@ body.vaporwave #chat_send {
 /*# sourceMappingURL=style.min.css.map */
 
 </style>
+<style>
+/* Windows XP Window Styles */
+.mswindow {
+  position: absolute;
+  background-color: #ECE9D8;
+  border: 1px solid #0055EA;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 3px 3px 0 0;
+}
+
+.mswindow-active {
+  border-color: #0055EA;
+}
+
+.mswindow-titlebar {
+  height: 30px;
+  background: linear-gradient(to bottom, #0A246A, #A6CAF0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  cursor: move;
+  user-select: none;
+}
+
+.mswindow-active .mswindow-titlebar {
+  background: linear-gradient(to bottom, #0A246A, #A6CAF0);
+}
+
+.mswindow:not(.mswindow-active) .mswindow-titlebar {
+  background: linear-gradient(to bottom, #7F7F7F, #B5B5B5);
+}
+
+.mswindow-title {
+  color: white;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 5px;
+}
+
+.mswindow-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.mswindow-button {
+  width: 21px;
+  height: 21px;
+  margin-left: 2px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.mswindow-minimize {
+  background-image: url('../img/window/minimize.png');
+}
+
+.mswindow-maximize {
+  background-image: url('../img/window/maximize.png');
+}
+
+.mswindow-close {
+  background-image: url('../img/window/close.png');
+}
+
+.mswindow-minimize:hover {
+  background-image: url('../img/window/minimize_hover.png');
+}
+
+.mswindow-maximize:hover {
+  background-image: url('../img/window/maximize_hover.png');
+}
+
+.mswindow-close:hover {
+  background-image: url('../img/window/close_hover.png');
+}
+
+.mswindow-content {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  font-family: 'MS Sans Serif', Tahoma, sans-serif;
+  font-size: 12px;
+  image-rendering: pixelated;
+}
+
+.mswindow-resize {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+  background-image: url('../img/window/resize.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+</style>
 </head>
 <body>
 	<div id="content">
