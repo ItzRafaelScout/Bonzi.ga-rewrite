@@ -106,7 +106,7 @@ var commands = {
       tokick.socket.disconnect();
       victim.kickslow = true;
       setTimeout(()=>{victim.kickslow = false},10000);
-    }
+    },
 
   pope:(victim, param)=>{
     if(victim.level<2) return;
