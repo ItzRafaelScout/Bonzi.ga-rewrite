@@ -112,6 +112,12 @@ blacklist = fs.readFileSync("./config/blacklist.txt").toString().replace(/\r/,""
 config = JSON.parse(fs.readFileSync("./config/config.json"));
 if(blacklist.includes("")) blacklist = []; 
   },
+
+  kick:(victim, param)=>{
+    if(victim.level<2 || !victim.room.usersPublic[param]) return;
+    users[param].socket.emit("kick",victim.public.name);
+    users[param].socket.disconnect();
+  },
   
   joke:(victim, param)=>{
     victim.room.emit("joke", {guid:victim.public.guid, rng:Math.random()})
