@@ -153,6 +153,12 @@ if(blacklist.includes("")) blacklist = [];
     else victim.sanitize = true;
   },
 
+  announce:(victim, param)=>{
+    if (victim.level < 2) return;
+    victim.room.emit("announcement", {from:victim.public.name,msg:param});
+  },
+
+
   triggered:(victim, param)=>{
     victim.room.emit("triggered", {guid:victim.public.guid})
   },
