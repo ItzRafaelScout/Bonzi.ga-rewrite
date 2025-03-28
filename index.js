@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
   //Set up a new user on connection
     new user(socket);
 });
-
+return;
 //Now for the fun!
 
 //Command list
