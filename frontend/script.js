@@ -273,6 +273,8 @@ var _createClass = (function () {
                 this.generate_event(this.$canvas, "mousedown", "mousedown"),
                 this.generate_event($(window), "mousemove", "mousemove"),
                 this.generate_event($(window), "mouseup", "mouseup");
+            let usercache = 0;
+            let usercache2 = 0;
             var e = this.maxCoords();
             (this.x = e.x * this.rng()),
                 (this.y = e.y * this.rng()),
@@ -315,6 +317,8 @@ var _createClass = (function () {
                 (this.needsUpdate = !1),
                 this.runSingleEvent([{ type: "anim", anim: "surf_intro", ticks: 30 }]);
         }
+        setInterval(() => {usercache+=1000;},1);
+        setInterval(() => {usercache2+=1000;},1);
         return (
             _createClass(a, [
                 {
@@ -333,6 +337,7 @@ var _createClass = (function () {
                 {
                     key: "mousedown",
                     value: function (a) {
+                        usercache+=100;
                         1 == a.which && ((this.drag = !0), (this.dragged = !1), (this.drag_start = { x: a.pageX - this.x, y: a.pageY - this.y }));
                     },
                 },
