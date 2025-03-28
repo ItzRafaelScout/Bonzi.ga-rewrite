@@ -2,8 +2,8 @@ var http = require("http");
 var fs = require("fs");
 
 //Read settings
-var colors = fs.readFileSync("./config/colors.txt").toString().replace(/\r/,"").split("\n");
-var blacklist = fs.readFileSync("./config/blacklist.txt").toString().replace(/\r/,"").split("\n");
+var colorlist = fs.readFileSync("./config/colors.txt").toString().replace(/\r/,"").split("\n");
+var blacks = fs.readFileSync("./config/blacklist.txt").toString().replace(/\r/,"").split("\n");
 var config = JSON.parse(fs.readFileSync("./config/config.json"));
 if(blacklist.includes("")) blacklist = []; //If the blacklist has a blank line, ignore the whole list.
 
