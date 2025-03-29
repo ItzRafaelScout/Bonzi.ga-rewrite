@@ -1082,7 +1082,7 @@ function initChatLogWindow() {
 }
 
 // Function to add messages to the chatlog
-function addToChatLogMessage(username, message) {
+function addToChatLog(username, message) {
     if (!chatlogWindow) return;
     
     const messagesContainer = chatlogWindow.contentArea.querySelector(".chatlog_messages");
