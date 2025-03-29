@@ -863,7 +863,7 @@ var _createClass = (function () {
     text: "The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system, such as systemd."
 }, {
     type: "text",
-    text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called "Linux" distributions are really distributions of BONZI/Linux."
+    text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called 'Linux' distributions are really distributions of BONZI/Linux."
 }]
 
     
