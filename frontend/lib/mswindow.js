@@ -14,8 +14,10 @@ class MSWindow {
    * @param {number} width - Window width (optional)
    * @param {number} height - Window height (optional)
    * @param {Object} buttons - Custom buttons configuration (optional)
+   * @param {number} minX - Minimum X position (optional)
+   * @param {number} minY - Minimum Y position (optional)
    */
-  constructor(title, html, x, y, width, height, buttons) {
+  constructor(title, html, x, y, width, height, buttons, minX, minY) {
     // Default values
     this.title = title || "Window";
     this.content = html || "";
@@ -26,6 +28,8 @@ class MSWindow {
     this.id = "window_" + Math.floor(Math.random() * 10000000);
     this.zIndex = 1000;
     this.buttons = buttons || { close: true, minimize: true, maximize: true };
+    this.minX = minX || 0;
+    this.minY = minY || 0;
     
     // Create the window
     this.create();
@@ -113,8 +117,12 @@ class MSWindow {
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       
-      const newX = e.clientX - offsetX;
-      const newY = e.clientY - offsetY;
+      let newX = e.clientX - offsetX;
+      let newY = e.clientY - offsetY;
+      
+      // Ensure window stays within minimum constraints
+      newX = Math.max(this.minX, newX);
+      newY = Math.max(this.minY, newY);
       
       this.element.style.left = `${newX}px`;
       this.element.style.top = `${newY}px`;
