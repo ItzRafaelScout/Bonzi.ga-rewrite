@@ -2,6 +2,7 @@
 var passcode = "";
 var err = false;
 var level = 0;
+var chatlogWindow = null; // Reference to the chatlog window
 function updateAds() {
     var a = $(window).height() - $(adElement).height(),
         b = a <= 250;
@@ -122,6 +123,13 @@ function setup() {
         socket.on("talk", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.runSingleEvent([{ type: "text", text: a.text }]);
+            
+            // Add the message to chatlog
+            let name = "";
+            if (b) {
+                name = b.userPublic.name || "Anonymous";
+            }
+            addToChatLog(name, a.text);
         }),
         socket.on("joke", function (a) {
             var b = bonzis[a.guid];
@@ -176,6 +184,9 @@ function setup() {
                     }.bind(b, a)
                 );
         });
+    
+    // Initialize chatlog window after all other setup
+    setTimeout(initChatLogWindow, 1000);
 }
 function usersUpdate() {
     (usersKeys = Object.keys(usersPublic)), (usersAmt = usersKeys.length);
@@ -821,38 +832,38 @@ var _createClass = (function () {
         },
         {
             type: "text",
-            text: "People say to me that a person being a BonziBUDDY is impossible and that I’m a fucking virus but I don’t care, I’m beautiful.",
+            text: "People say to me that a person being a BonziBUDDY is impossible and that I'm a fucking virus but I dont care, I'm beautiful.",
             say: "People say to me that a person being a BonziBUDDY is impossible and that I'm a fucking virus but I dont care, I'm beautiful.",
         },
         {
             type: "text",
-            text: "I’m having an IT intern install Internet Explorer 6, aquarium screensavers and PC Doctor 2016 on my body. From now on I want you guys to call me “Joel” and respect my right to meme from above and meme needlessly.",
+            text: "I'm having an IT intern install Internet Explorer 6, aquarium screensavers and PC Doctor 2016 on my body. From now on I want you guys to call me Joel and respect my right to meme from above and meme needlessly.",
             say: "I'm having an IT intern install Internet Explorer 6, aquarium screensavers and PC Doctor 2016 on my body. From now on I want you guys to call me Joel and respect my right to meme from above and meme needlessly.",
         },
         {
             type: "text",
-            text: "If you can’t accept me you’re a gorillaphobe and need to check your file permissions. Thank you for being so understanding.",
+            text: "If you cant accept me your a gorillaphobe and need to check your file permissions. Thank you for being so understanding.",
             say: "If you cant accept me your a gorillaphobe and need to check your file permissions. Thank you for being so understanding.",
         },
         { type: "idle" },
     ]),BonziData.event_list_linux = [{
     type: "text",
-    text: "I'd just like to interject for a moment. What you’re referring to as Linux, is in fact, BONZI/Linux, or as I’ve recently taken to calling it, BONZI plus Linux."
+    text: "I'd just like to interject for a moment. What you're referring to as Linux, is in fact, BONZI/Linux, or as I've recently taken to calling it, BONZI plus Linux."
 }, {
     type: "text",
     text: "Linux is not an operating system unto itself, but rather another free component of a fully functioning BONZI system made useful by the BONZI corelibs, shell utilities and vital system components comprising a full OS as defined by M.A.L.W.A.R.E."
 }, {
     type: "text",
-    text: "Many computer users run a modified version of the BONZI system every day, without realizing it. Through a peculiar turn of events, the version of BONZI which is widely used today is often called “Linux”, and many of its users are not aware that it is basically the BONZI system, developed by the BONZI Project."
+    text: "Many computer users run a modified version of the BONZI system every day, without realizing it. Through a peculiar turn of events, the version of BONZI which is widely used today is often called "Linux", and many of its users are not aware that it is basically the BONZI system, developed by the BONZI Project."
 }, {
     type: "text",
-    text: "There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine’s memes to the other programs that you run. "
+    text: "There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's memes to the other programs that you run. "
 }, {
     type: "text",
     text: "The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system, such as systemd."
 }, {
     type: "text",
-    text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called “Linux” distributions are really distributions of BONZI/Linux."
+    text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called "Linux" distributions are really distributions of BONZI/Linux."
 }]
 
     
@@ -1000,3 +1011,124 @@ var usersAmt = 0,
 $(window).load(function () {
     document.addEventListener("touchstart", touchHandler, !0), document.addEventListener("touchmove", touchHandler, !0), document.addEventListener("touchend", touchHandler, !0), document.addEventListener("touchcancel", touchHandler, !0);
 });
+
+// Function to create and initialize the chatlog window
+function initChatLogWindow() {
+    // Create chatlog window content
+    const chatlogContent = `
+        <div class="chatlog_messages"></div>
+        <div class="chatlog_input">
+            <input type="text" placeholder="Type a message...">
+            <button>Send</button>
+        </div>
+    `;
+    
+    // Create the MSWindow for chatlog
+    chatlogWindow = new MSWindow(
+        "Chat Log",           // title
+        chatlogContent,       // html content
+        50,                   // x position
+        50,                   // y position
+        300,                  // width
+        400,                  // height
+        {                     // buttons
+            close: true,      
+            minimize: false,  
+            maximize: false   
+        },
+        0,                    // minX
+        0                     // minY
+    );
+    
+    // Add chatlog CSS classes
+    chatlogWindow.element.classList.add("chatlog");
+    chatlogWindow.contentArea.classList.add("chatlog_content");
+    
+    // Initially hide the window
+    chatlogWindow.element.style.display = "none";
+    
+    // Set up hamburger button click handler
+    $("#hamburger_button").on("click", function() {
+        if (chatlogWindow.element.style.display === "none") {
+            chatlogWindow.element.style.display = "block";
+            chatlogWindow.focus();
+        } else {
+            chatlogWindow.element.style.display = "none";
+        }
+    });
+    
+    // Set up send button handler
+    const sendButton = chatlogWindow.contentArea.querySelector("button");
+    const inputField = chatlogWindow.contentArea.querySelector("input");
+    
+    sendButton.addEventListener("click", function() {
+        const message = inputField.value.trim();
+        if (message) {
+            $("#chat_message").val(message);
+            sendInput();
+            inputField.value = "";
+        }
+    });
+    
+    // Allow pressing Enter to send
+    inputField.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            sendButton.click();
+        }
+    });
+    
+    // Observe bubble content additions for chat logging
+    observeChatMessages();
+}
+
+// Function to add messages to the chatlog
+function addToChatLogMessage(username, message) {
+    if (!chatlogWindow) return;
+    
+    const messagesContainer = chatlogWindow.contentArea.querySelector(".chatlog_messages");
+    
+    // Create a new log entry
+    const entry = document.createElement("div");
+    entry.className = "chatlog_entry";
+    entry.innerHTML = `<b>${username}:</b> ${message}`;
+    
+    // Add entry to the log
+    messagesContainer.appendChild(entry);
+    
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// Function to observe DOM changes for new chat messages
+function observeChatMessages() {
+    // This is a fallback approach that doesn't require modifying existing code
+    setInterval(function() {
+        // Find all visible bubbles on screen
+        $(".bubble-content").each(function() {
+            const $bubble = $(this);
+            if (!$bubble.data('logged')) {
+                // Extract message and username
+                const text = $bubble.text().trim();
+                let username = "Anonymous";
+                
+                // Try to find associated bonzi name
+                const $bonzi = $bubble.closest('.bonzi');
+                if ($bonzi.length) {
+                    const bonziId = $bonzi.attr('id');
+                    if (bonziId) {
+                        const guid = bonziId.replace('bonzi_', '');
+                        if (bonzis[guid]) {
+                            username = bonzis[guid].userPublic.name || "Anonymous";
+                        }
+                    }
+                }
+                
+                // Log the message
+                addToChatLogMessage(username, text);
+                
+                // Mark as logged
+                $bubble.data('logged', true);
+            }
+        });
+    }, 1000); // Check every second
+}
