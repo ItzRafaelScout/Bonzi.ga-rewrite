@@ -797,6 +797,33 @@ body.vaporwave #chat_send {
   background-position: bottom right;
 }
 
+#log_window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 350px;
+    max-width: calc(100% - 200px);
+    height: calc(100% - 32px);
+    z-index: 1000;
+}
+
+#log_cont {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    word-wrap: break-word;
+    font-family: 'MS Gothic', Tahoma, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    padding: 5px;
+}
+
+.mswindow-content {
+    background-color: white;
+    border: 1px solid #aca899;
+    margin: 2px;
+}
+
 </style>
 </head>
 <body>
@@ -805,6 +832,21 @@ body.vaporwave #chat_send {
               <img src="./img/assets/log_button.webp">
               Message Log
             </div>
+
+<div id="log_window" class="mswindow" style="display: none;">
+    <div class="mswindow-titlebar">
+        <div class="mswindow-title">Message Log</div>
+        <div class="mswindow-buttons">
+            <div class="mswindow-button mswindow-minimize"></div>
+            <div class="mswindow-button mswindow-maximize"></div>
+            <div class="mswindow-button mswindow-close"></div>
+        </div>
+    </div>
+    <div class="mswindow-content">
+        <div id="log_cont"></div>
+    </div>
+    <div class="mswindow-resize"></div>
+</div>
 
 		<div id="room_info">
 			<span>Room ID - <span class="room_id">???</span></span><br>
