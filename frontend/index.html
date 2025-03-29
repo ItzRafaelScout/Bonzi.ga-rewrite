@@ -24,6 +24,14 @@
 
 
 	<script src="./script.js"></script>
+	<script>
+        var show = false;
+        
+        function showtoggle(){
+            $('#logshow').hide();$('#mainlog').show()
+            document.getElementById("mswindow-content").scrollTop = document.getElementById("mswindow-content").scrollHeight;
+        }
+        </script>
 <style>
 span{
 font-size:12px;
@@ -828,25 +836,23 @@ body.vaporwave #chat_send {
 </head>
 <body>
 	<div id="content">
-	    <div id="logshow" class="icon">
-              <img src="./img/assets/log_button.webp">
-              Message Log
-            </div>
-
+	
+<div id="log" style="display:none;">
+<div id="mainlog" style="display:none;">
 <div id="log_window" class="mswindow" style="display: none;">
     <div class="mswindow-titlebar">
-        <div class="mswindow-title">Message Log</div>
+        <div class="mswindow-title">Bonzi LOG™/div>
         <div class="mswindow-buttons">
-            <div class="mswindow-button mswindow-minimize"></div>
-            <div class="mswindow-button mswindow-maximize"></div>
-            <div class="mswindow-button mswindow-close"></div>
+            <div onclick="$('#logshow').show();$('#mainlog').hide()" class="mswindow-button mswindow-close"></div>
         </div>
     </div>
     <div class="mswindow-content">
+	<p>Welcome to BonziWORLD!</p>
         <div id="log_cont"></div>
     </div>
     <div class="mswindow-resize"></div>
 </div>
+<button id="logshow" onclick="showtoggle()"><i class="fa fa-bars" aria-hidden="true"></i></button>
 
 		<div id="room_info">
 			<span>Room ID - <span class="room_id">???</span></span><br>
