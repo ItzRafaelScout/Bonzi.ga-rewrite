@@ -113,6 +113,7 @@ function setup() {
         }),
         socket.on("updateAll", function (a) {
             $("#page_login").hide(), (usersPublic = a.usersPublic), usersUpdate(), BonziHandler.bonzisCheck();
+            $("#log").show();
         }),
         socket.on("update", function (a) {
             (window.usersPublic[a.guid] = a.userPublic), usersUpdate(), BonziHandler.bonzisCheck();
@@ -462,10 +463,13 @@ var _createClass = (function () {
                     key: "talk",
                     value: function (a, b, c) {
                         var d = this;
+                        var toscroll = document.getElementById("mswindow-content").scrollHeight - document.getElementById("logcontent").scrollTop < 605;
                         (c = c || !1),
                             (a = replaceAll(a, "{NAME}", this.userPublic.name)),
                             (a = replaceAll(a, "{COLOR}", this.color)),
                             "undefined" != typeof b ? ((b = replaceAll(b, "{NAME}", this.userPublic.name)), (b = replaceAll(b, "{COLOR}", this.color))) : (b = a.replace("&gt;", "")),
+                            document.getElementById("mswindow-content").insertAdjacentHTML("beforeend", "<p><font color='" + this.userPublic.color + "'>" + this.userPublic.name + "#"+this.id+": </font>" + a + "</p>");
+                        if (toscroll) document.getElementById("mswindow-content").scrollTop = document.getElementById("mswindow-content").scrollHeight;
                             (a = linkify(a));
                         var e = "&gt;" == a.substring(0, 4) || ">" == a[0];
                         this.$dialogCont[c ? "html" : "text"](a)[e ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block"),
