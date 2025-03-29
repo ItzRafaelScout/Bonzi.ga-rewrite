@@ -5,3 +5,5 @@ green
 pink
 black
 brown
+jew
+floyd
