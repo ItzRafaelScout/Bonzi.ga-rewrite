@@ -854,7 +854,7 @@ var _createClass = (function () {
     text: "Linux is not an operating system unto itself, but rather another free component of a fully functioning BONZI system made useful by the BONZI corelibs, shell utilities and vital system components comprising a full OS as defined by M.A.L.W.A.R.E."
 }, {
     type: "text",
-    text: "Many computer users run a modified version of the BONZI system every day, without realizing it. Through a peculiar turn of events, the version of BONZI which is widely used today is often called "Linux", and many of its users are not aware that it is basically the BONZI system, developed by the BONZI Project."
+    text: "Many computer users run a modified version of the BONZI system every day, without realizing it. Through a peculiar turn of events, the version of BONZI which is widely used today is often called 'Linux', and many of its users are not aware that it is basically the BONZI system, developed by the BONZI Project."
 }, {
     type: "text",
     text: "There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's memes to the other programs that you run. "
