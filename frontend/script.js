@@ -1017,10 +1017,6 @@ function initChatLogWindow() {
     // Create chatlog window content
     const chatlogContent = `
         <div class="chatlog_messages"></div>
-        <div class="chatlog_input">
-            <input type="text" placeholder="Type a message...">
-            <button>Send</button>
-        </div>
     `;
     
     // Create the MSWindow for chatlog
